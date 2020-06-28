@@ -1,6 +1,9 @@
 package com.southwind.phone_store_demo.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -14,6 +17,9 @@ import java.util.Date;
 @Entity
 @DynamicInsert
 @DynamicUpdate
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class BuyerAddress {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

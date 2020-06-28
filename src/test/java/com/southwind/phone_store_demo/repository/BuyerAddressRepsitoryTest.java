@@ -25,12 +25,13 @@ class BuyerAddressRepsitoryTest {
 
     @Test
     void save(){
-        BuyerAddress buyerAddress = new BuyerAddress();
+        /*BuyerAddress buyerAddress = new BuyerAddress();
         buyerAddress.setAreaCode("330104");
         buyerAddress.setBuyerAddress("广东省深圳市罗湖区科技路123号456室");
         buyerAddress.setBuyerName("小红");
-        buyerAddress.setBuyerPhone("13678787878");
-        repsitory.save(buyerAddress);
+        buyerAddress.setBuyerPhone("13678787878");*/
+        repsitory.save(BuyerAddress.builder().areaCode("330104").buyerAddress("广东省深圳市罗湖区科技路123号456室")
+        .buyerName("小东").buyerPhone("17863819685").build());
     }
 
     @Test
