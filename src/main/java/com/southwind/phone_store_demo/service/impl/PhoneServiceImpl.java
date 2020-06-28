@@ -35,7 +35,7 @@ public class PhoneServiceImpl implements PhoneService {
 
     @Override
     public DataVO findDataVO() {
-        DataVO dataVO = new DataVO();
+//        DataVO dataVO = new DataVO();
         //类型
         List<PhoneCategory> phoneCategoryList = phoneCategoryRepository.findAll();
         //常规写法
@@ -47,13 +47,16 @@ public class PhoneServiceImpl implements PhoneService {
 //            phoneCategoryVOList.add(phoneCategoryVO);
 //        }
         //stream
-        List<PhoneCategoryVO> phoneCategoryVOList =  phoneCategoryList.stream()
+        /*List<PhoneCategoryVO> phoneCategoryVOList =  phoneCategoryList.stream()
                 .map(e -> new PhoneCategoryVO(
                         e.getCategoryName(),
                         e.getCategoryType()
-                )).collect(Collectors.toList());
+                )).collect(Collectors.toList());*/
+        List<PhoneCategoryVO> phoneCategoryVOList = phoneCategoryList.stream().map(e->PhoneCategoryVO.builder()
+                                                    .categoryName(e.getCategoryName())
+                                                    .categoryType(e.getCategoryType()).build()).collect(Collectors.toList());
 
-        dataVO.setCategories(phoneCategoryVOList);
+//        dataVO.setCategories(phoneCategoryVOList);
 
         //手机
         List<PhoneInfo> phoneInfoList = phoneInfoRepository.findAllByCategoryType(phoneCategoryList.get(0).getCategoryType());
@@ -75,9 +78,11 @@ public class PhoneServiceImpl implements PhoneService {
                         PhoneUtil.createTag(e.getPhoneTag()),
                         e.getPhoneIcon()
                 )).collect(Collectors.toList());
-        dataVO.setPhones(phoneInfoVOList);
+//        dataVO.setPhones(phoneInfoVOList);
+        return DataVO.builder().categories(phoneCategoryVOList)
+                        .phones(phoneInfoVOList).build();
 
-        return dataVO;
+//        return dataVO;
     }
 
     @Override
